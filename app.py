@@ -10,89 +10,247 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Dark mode CSS
+# Design CSS
 st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* Base */
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* App background */
+.stApp {
+    background-color: #0d0f14;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #13161e !important;
+    border-right: 1px solid #1f2330;
+}
+[data-testid="stSidebar"] .stSelectbox label,
+[data-testid="stSidebar"] .stTextInput label {
+    color: #9aa0b0 !important;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Hero header */
+.hero-header {
+    background: linear-gradient(135deg, #1a1d27 0%, #0f1219 60%, #1a1020 100%);
+    border: 1px solid #2a2d3d;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #f0a500, #ff6b6b, #7c5cbf);
+}
+.hero-header h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+}
+.hero-header p {
+    color: #6b7280;
+    font-size: 0.88rem;
+    margin: 0;
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(240,165,0,0.12);
+    border: 1px solid rgba(240,165,0,0.3);
+    color: #f0a500;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
 /* Metric cards */
 [data-testid="stMetric"] {
-    background-color: #1c1f26;
-    border: 1px solid #2a2d35;
-    border-radius: 10px;
-    padding: 16px 20px;
+    background: linear-gradient(145deg, #1a1d27, #14171f);
+    border: 1px solid #1f2330;
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color 0.2s;
 }
-[data-testid="stMetricLabel"] p { color: #9aa0b0 !important; font-size: 0.78rem; }
-[data-testid="stMetricValue"]  { color: #e0e0e0 !important; font-family: monospace; }
+[data-testid="stMetric"]:hover {
+    border-color: #2e3347;
+}
+[data-testid="stMetricLabel"] p {
+    color: #6b7280 !important;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+[data-testid="stMetricValue"] {
+    color: #f0f0f0 !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem !important;
+}
 
-/* Go / Caution / No-Go banners */
-.go-banner {
-    background-color: #0a2e1a;
-    border: 2px solid #00c851;
+/* Pairing header */
+.pairing-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 14px 20px;
+    background: #13161e;
+    border: 1px solid #1f2330;
     border-radius: 10px;
-    padding: 18px 24px;
-    text-align: center;
-    font-size: 1.3rem;
+}
+.pairing-mat {
+    background: #1f2330;
+    border-radius: 6px;
+    padding: 5px 12px;
+    color: #e0e0e0;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+.pairing-plus {
+    color: #4b5268;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Banners */
+.go-banner {
+    background: linear-gradient(135deg, #061a0e, #0a2e1a);
+    border: 1px solid #00c851;
+    border-left: 4px solid #00c851;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #00c851;
+    letter-spacing: 0.02em;
 }
 .caution-banner {
-    background-color: #2e2200;
-    border: 2px solid #f0a500;
-    border-radius: 10px;
-    padding: 18px 24px;
-    text-align: center;
-    font-size: 1.3rem;
+    background: linear-gradient(135deg, #1a1200, #2e2200);
+    border: 1px solid #f0a500;
+    border-left: 4px solid #f0a500;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #f0a500;
+    letter-spacing: 0.02em;
 }
 .nogo-banner {
-    background-color: #2e0a0a;
-    border: 2px solid #ff4444;
-    border-radius: 10px;
-    padding: 18px 24px;
-    text-align: center;
-    font-size: 1.3rem;
+    background: linear-gradient(135deg, #1a0606, #2e0a0a);
+    border: 1px solid #ff4444;
+    border-left: 4px solid #ff4444;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #ff4444;
+    letter-spacing: 0.02em;
 }
+.banner-icon { font-size: 1.4rem; }
+.banner-sub { font-size: 0.8rem; font-weight: 400; opacity: 0.7; margin-left: auto; }
 
 /* Detail card */
 .detail-card {
-    background-color: #1c1f26;
-    border: 1px solid #2a2d35;
-    border-radius: 10px;
-    padding: 20px 24px;
+    background: linear-gradient(145deg, #1a1d27, #14171f);
+    border: 1px solid #1f2330;
+    border-radius: 14px;
+    padding: 24px 26px;
+    height: 100%;
 }
 .detail-card h4 {
     color: #f0a500;
-    margin-bottom: 12px;
-    font-size: 0.85rem;
+    margin: 0 0 16px 0;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
+    font-weight: 600;
 }
 .detail-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
-    border-bottom: 1px solid #2a2d35;
-    padding-bottom: 6px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1a1d27;
 }
-.detail-label { color: #9aa0b0; font-size: 0.85rem; }
-.detail-value { color: #e0e0e0; font-family: monospace; font-size: 0.85rem; }
+.detail-row:last-of-type { border-bottom: none; }
+.detail-label { color: #6b7280; font-size: 0.82rem; }
+.detail-value { color: #d1d5db; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 500; }
 .risk-low { color: #00c851; }
 .risk-med { color: #f0a500; }
 .risk-high { color: #ff4444; }
 
+.notes-box {
+    background: #0d0f14;
+    border: 1px solid #1f2330;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+}
+.notes-box p {
+    color: #9aa0b0;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
 /* Claude answer box */
 .claude-box {
-    background-color: #1c1f26;
-    border: 1px solid #2a2d35;
+    background: linear-gradient(145deg, #1a1d27, #14171f);
+    border: 1px solid #1f2330;
     border-left: 3px solid #f0a500;
-    border-radius: 8px;
-    padding: 18px 22px;
-    font-size: 0.92rem;
-    line-height: 1.7;
+    border-radius: 12px;
+    padding: 22px 26px;
+    font-size: 0.9rem;
+    line-height: 1.75;
     white-space: pre-wrap;
-    color: #e0e0e0;
+    color: #d1d5db;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Section heading */
+.section-heading {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #4b5268;
+    margin: 24px 0 12px 0;
+}
+
+/* Divider override */
+hr { border-color: #1f2330 !important; }
+
+/* Button */
+.stButton > button {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -334,8 +492,8 @@ def consult_claude(api_key, mat_a, mat_b, score, question):
 # Sidebar
 # ---------------------------------------------------------------------------
 with st.sidebar:
-    st.markdown("## MatCompat Pro")
-    st.caption("Material Compatibility & Production Risk Dashboard")
+    st.markdown("### ⚙️ MatCompat Pro")
+    st.caption("Material Compatibility & Production Risk")
     st.divider()
 
     # Load API key from Streamlit secrets (deployed) or user input (local)
@@ -362,9 +520,13 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 # Main panel
 # ---------------------------------------------------------------------------
-st.title("Material Compatibility & Production Risk Dashboard")
-st.caption("Industrial Material Compatibility & Production Risk Dashboard")
-st.divider()
+st.markdown("""
+<div class="hero-header">
+    <div class="hero-badge">Production Engineering Tool</div>
+    <h1>Material Compatibility & Production Risk Dashboard</h1>
+    <p>Select two materials to analyse galvanic risk, CTE mismatch, chemical compatibility, and supply chain exposure.</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Placeholder when no analysis yet
 if not analyze and "compat_data" not in st.session_state:
@@ -390,8 +552,16 @@ if "compat_data" in st.session_state:
     mat_b_s = st.session_state["mat_b"]
     score  = data["risk_score"]
 
+    # Pairing header
+    st.markdown(f"""
+    <div class="pairing-header">
+        <span class="pairing-mat">{mat_a_s}</span>
+        <span class="pairing-plus">+</span>
+        <span class="pairing-mat">{mat_b_s}</span>
+    </div>
+    """, unsafe_allow_html=True)
+
     # Metrics row
-    st.markdown(f"### Pairing: {mat_a_s} x {mat_b_s}")
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("Composite Risk",         f"{score} / 10")
     m2.metric("Chemical Compatibility", f"{data['chemical_compat']} / 10")
@@ -403,17 +573,17 @@ if "compat_data" in st.session_state:
     # Go / No-Go banner
     if score <= 4:
         st.markdown(
-            f'<div class="go-banner">GO - Acceptable Pairing &nbsp;|&nbsp; Risk {score}/10</div>',
+            f'<div class="go-banner"><span class="banner-icon">✅</span> GO — Acceptable Pairing<span class="banner-sub">Risk Score: {score} / 10</span></div>',
             unsafe_allow_html=True,
         )
     elif score <= 6:
         st.markdown(
-            f'<div class="caution-banner">CAUTION - Engineering Review Required &nbsp;|&nbsp; Risk {score}/10</div>',
+            f'<div class="caution-banner"><span class="banner-icon">⚠️</span> CAUTION — Engineering Review Required<span class="banner-sub">Risk Score: {score} / 10</span></div>',
             unsafe_allow_html=True,
         )
     else:
         st.markdown(
-            f'<div class="nogo-banner">NO-GO - High Risk Pairing &nbsp;|&nbsp; Risk {score}/10</div>',
+            f'<div class="nogo-banner"><span class="banner-icon">🚫</span> NO-GO — High Risk Pairing<span class="banner-sub">Risk Score: {score} / 10</span></div>',
             unsafe_allow_html=True,
         )
 
@@ -454,9 +624,10 @@ if "compat_data" in st.session_state:
                     <span class="detail-label">Supply Chain Risk</span>
                     <span class="detail-value">{data["supply_chain_risk"]}/10</span>
                 </div>
-                <br>
-                <h4>Engineering Notes</h4>
-                <p style="color:#c0c4cc;font-size:0.88rem;line-height:1.65">{data["notes"]}</p>
+                <div class="notes-box">
+                    <h4 style="margin-bottom:8px">Engineering Notes</h4>
+                    <p>{data["notes"]}</p>
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -468,7 +639,7 @@ if "compat_data" in st.session_state:
 
     # Consult Claude
     st.divider()
-    st.subheader("Consult Claude - Production AI")
+    st.markdown('<div class="section-heading">Consult Claude — Production AI</div>', unsafe_allow_html=True)
 
     suggestion = f"Will {mat_a_s} and {mat_b_s} gall under high vacuum at elevated temperature?"
     st.info(f"Suggested question: {suggestion}")
