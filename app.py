@@ -339,14 +339,16 @@ with st.sidebar:
     st.divider()
 
     # Load API key from Streamlit secrets (deployed) or user input (local)
-    default_key = st.secrets.get("ANTHROPIC_API_KEY", "") if hasattr(st, "secrets") else ""
-    api_key = st.text_input(
-        "Anthropic API Key",
-        value=default_key,
-        type="password",
-        placeholder="sk-ant-...",
-        help="Required for the Consult Claude feature.",
-    )
+    secret_key = st.secrets.get("ANTHROPIC_API_KEY", "") if hasattr(st, "secrets") else ""
+    if secret_key:
+        api_key = secret_key
+    else:
+        api_key = st.text_input(
+            "Anthropic API Key",
+            type="password",
+            placeholder="sk-ant-...",
+            help="Required for the Consult Claude feature.",
+        )
     st.divider()
 
     st.markdown("### Material Selection")
