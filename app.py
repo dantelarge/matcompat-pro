@@ -4,7 +4,7 @@ import anthropic
 
 # Page config - must be the first Streamlit call
 st.set_page_config(
-    page_title="MatCompat Pro",
+    page_title="Material Compatibility & Production Risk Dashboard",
     page_icon=":gear:",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -362,7 +362,7 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 # Main panel
 # ---------------------------------------------------------------------------
-st.title("MatCompat Pro")
+st.title("Material Compatibility & Production Risk Dashboard")
 st.caption("Industrial Material Compatibility & Production Risk Dashboard")
 st.divider()
 
