@@ -12,8 +12,8 @@ st.set_page_config(
 
 # Design CSS
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 /* Base */
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
